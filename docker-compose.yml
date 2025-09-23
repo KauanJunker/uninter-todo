@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-tarefas
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: tarefas_db
+      MYSQL_USER: tarefas
+      MYSQL_PASSWORD: tarefas
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - tarefas-network
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Opcional: phpMyAdmin para gerenciar o banco via interface web
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-tarefas
+    restart: always
+    environment:
+      PMA_HOST: mysql-db
+      PMA_PORT: 3306
+      PMA_USER: tarefas
+      PMA_PASSWORD: tarefas
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql-db
+    networks:
+      - tarefas-network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  tarefas-network:
+    driver: bridge
