@@ -18,7 +18,7 @@ public class TarefaController {
     @Autowired
     private TarefaRepository tarefaRepository;
 
-    // CREATE - Criar uma nova tarefa
+
     @PostMapping
     public ResponseEntity<Tarefa> criarTarefa(@Valid @RequestBody Tarefa tarefa) {
         try {
@@ -29,7 +29,7 @@ public class TarefaController {
         }
     }
 
-    // READ - Consultar todas as tarefas
+
    @GetMapping
    public ResponseEntity<List<Tarefa>> listarTodasTarefas() {
        try {
@@ -45,7 +45,7 @@ public class TarefaController {
        }
    }
 
-    // READ - Consultar uma tarefa específica pelo ID
+
     @GetMapping("/{id}")
     public ResponseEntity<Tarefa> buscarTarefaPorId(@PathVariable("id") Long id) {
         try {
@@ -61,7 +61,7 @@ public class TarefaController {
         }
     }
 
-    // UPDATE - Atualizar uma tarefa existente
+
     @PutMapping("/{id}")
     public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable("id") Long id, @Valid @RequestBody Tarefa tarefaAtualizada) {
         try {
@@ -82,7 +82,7 @@ public class TarefaController {
         }
     }
 
-    // DELETE - Remover uma tarefa
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> removerTarefa(@PathVariable("id") Long id) {
         try {
@@ -97,7 +97,6 @@ public class TarefaController {
         }
     }
 
-    // DELETE - Remover todas as tarefas
     @DeleteMapping
     public ResponseEntity<HttpStatus> removerTodasTarefas() {
         try {
@@ -108,7 +107,6 @@ public class TarefaController {
         }
     }
 
-    // Buscar tarefas por responsável
     @GetMapping("/responsavel/{responsavel}")
     public ResponseEntity<List<Tarefa>> buscarTarefasPorResponsavel(@PathVariable("responsavel") String responsavel) {
         try {
@@ -124,7 +122,6 @@ public class TarefaController {
         }
     }
 
-    // Buscar tarefas por nome
     @GetMapping("/buscar")
     public ResponseEntity<List<Tarefa>> buscarTarefasPorNome(@RequestParam String nome) {
         try {
